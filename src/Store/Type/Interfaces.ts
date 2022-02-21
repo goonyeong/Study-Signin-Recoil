@@ -1,6 +1,9 @@
-// interface
-export interface ISample {
-  string: string;
-  number: number;
-  boolean: boolean;
+export interface IInput {
+  setState: (value: string) => void;
+  externalIsWrong?: boolean;
+}
+
+export interface IBtn {
+  onClick: () => void;
+  label: string;
 }

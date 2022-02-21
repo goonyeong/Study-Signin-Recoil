@@ -2,37 +2,16 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { signInfoAtom } from '../../Store/Atoms';
-import { InputID, InputPW } from '../../Components/Input';
+import { InputID, InputPW, InputPWAgain } from '../../Components/Input';
 import { Button } from '../../Components/Button';
 import { useNavigate } from 'react-router-dom';
 
-const Home = () => {
-  const signInfo = useRecoilValue(signInfoAtom);
-  const setSignInfo = useSetRecoilState(signInfoAtom);
-
+const Signup = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordAgain, setPasswordAgain] = useState('');
 
   const navigate = useNavigate();
-
-  const doSignin = () => {
-    setSignInfo({
-      ...signInfo,
-      userID: id,
-      userPW: password,
-    });
-  };
-
-  const completeSignin = () => {
-    setSignInfo({
-      ...signInfo,
-      isSign: true,
-    });
-  };
-
-  useEffect(() => {
-    console.log(signInfo);
-  }, []);
 
   return (
     <Container>
@@ -47,31 +26,32 @@ const Home = () => {
             setPassword(value);
           }}
         />
+        <InputPWAgain
+          setState={(value) => {
+            setPasswordAgain(value);
+          }}
+          externalIsWrong={password === passwordAgain}
+        />
         <BtnContainer>
           <Button
             onClick={() => {
-              doSignin();
-              completeSignin();
-            }}
-            label="Log in"
-          />
-          <Button
-            onClick={() => {
-              navigate('/signup');
+              // 서버로 회원정보 보내기
             }}
             label="Sign up"
           />
+          <Button
+            onClick={() => {
+              navigate('/');
+            }}
+            label="Home"
+          />
         </BtnContainer>
       </div>
-      <SigninIngoBox>
-        <h4>UserID : {signInfo.userID}</h4>
-        <h4>UserPW : {signInfo.userPW}</h4>
-      </SigninIngoBox>
     </Container>
   );
 };
 
-export default Home;
+export default Signup;
 
 const Container = styled.div`
   display: flex;
@@ -80,8 +60,8 @@ const Container = styled.div`
   padding-top: 100px;
   .input_container {
     width: 50%;
-    height: 500px;
-    border: 1px solid #97d0f1;
+    height: 600px;
+    border: 1px solid #cd55d1;
     border-radius: 20px;
     display: grid;
     align-content: start;
@@ -95,5 +75,3 @@ const BtnContainer = styled.div`
   display: grid;
   grid-gap: 20px;
 `;
-
-const SigninIngoBox = styled.div``;

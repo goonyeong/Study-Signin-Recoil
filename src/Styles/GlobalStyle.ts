@@ -13,7 +13,11 @@ const GlobalStyle = createGlobalStyle`
         font-family: "Font_test";
         background-color: ${({ theme }) => theme.colors.background_color};
         color: ${({ theme }) => theme.colors.text_color};
-        font-size: 6rem;
+        font-size: 3rem;
+    }
+    input{
+        font-size: inherit;
+        font-family: inherit;
     }
     a{
         color: inherit;
@@ -21,6 +25,10 @@ const GlobalStyle = createGlobalStyle`
     }
     ul{
         list-style: none;
+    }
+    button{
+        background-color: transparent;
+        outline: none;
     }
     
 `;
